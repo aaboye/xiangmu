@@ -8,17 +8,20 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.ren.tarena.xiaohua.R;
+import com.ren.tarena.xiaohua.util.SharePreferenceUtil;
 
 public class SplashActivity extends AppCompatActivity {
 
 
     private ImageView imageView;
     private Animation animation_splash;
+    SharePreferenceUtil sharePreferenceUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        sharePreferenceUtil = new SharePreferenceUtil(this);
         //初始化控件
         imageView = (ImageView) findViewById(R.id.imageID);
         //加载动画
@@ -33,12 +36,18 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                Intent intent;
                 //跳转页面
-                Intent intent = new Intent(SplashActivity.this, GuideActivity.class);
-                startActivity(intent);
-                //实现跳转是的一个切换页面
-                overridePendingTransition(R.anim.enter_anim, R.anim.out_anim);
+                if (sharePreferenceUtil.isFirst()) {
+                    intent = new Intent(SplashActivity.this, GuideActivity.class);
+                    overridePendingTransition(R.anim.enter_anim, R.anim.out_anim);
+                    sharePreferenceUtil.setFirst(false);
 
+                } else {
+                    //实现跳转是的一个切换页面
+                    intent = new Intent(SplashActivity.this, MainActivity.class);
+                }
+                startActivity(intent);
                 finish();
 
             }

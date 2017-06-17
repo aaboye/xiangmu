@@ -21,13 +21,13 @@ import java.util.List;
 
 public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.ViewHolder> {
 
-    private List<Funny.Result.Data> funnys=new ArrayList<Funny.Result.Data>();
+    private List<Funny.ShowapiResBodyBean.ContentlistBean> funnys=new ArrayList<Funny.ShowapiResBodyBean.ContentlistBean>();
     Context context;
     public FunnyAdapter( Context context) {
 
         this.context=context;
     }
-    public void addFunnies(List<Funny.Result.Data> list,boolean isClear){
+    public void addFunnies(List<Funny.ShowapiResBodyBean.ContentlistBean> list,boolean isClear){
         //如果要清空原始数据
         if(isClear){
             this.funnys.clear();
@@ -50,9 +50,12 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.textView.setText(funnys.get(position).getContent());
-        String imageUrl=funnys.get(position).getUrl();
+        holder.tv_title.setText(funnys.get(position).getTitle());
+        String imageUrl=funnys.get(position).getImg();
         MyImageLoader.setBitmapFromCache(context,holder.imageView,imageUrl);
+        String str=funnys.get(position).getCt();
+        str=str.substring(0,str.lastIndexOf(":"));
+        holder.tv_date.setText(str);
     }
 
     @Override
@@ -61,13 +64,16 @@ public class FunnyAdapter extends RecyclerView.Adapter<FunnyAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tv_title;
         ImageView imageView;
-        TextView textView;
+        TextView tv_date;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.masonry_item_img);
-            textView = (TextView) itemView.findViewById(R.id.masonry_item_title);
+            tv_title = (TextView) itemView.findViewById(R.id.tv_title_inflate_fun);
+            imageView = (ImageView) itemView.findViewById(R.id.image_inflate_fun);
+            tv_date= (TextView) itemView.findViewById(R.id.date_inflate_fun);
         }
     }
 }

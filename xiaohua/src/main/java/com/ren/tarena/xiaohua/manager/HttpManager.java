@@ -15,6 +15,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.ren.tarena.xiaohua.entity.Funny;
+import com.ren.tarena.xiaohua.entity.Gif;
 import com.ren.tarena.xiaohua.entity.Tuijian;
 import com.ren.tarena.xiaohua.entity.User;
 import com.ren.tarena.xiaohua.iconstant.IURL;
@@ -202,22 +203,10 @@ public class HttpManager {
     }
 
     //网络请求趣图页面
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public static void loadFunny(Context context, final FunnyLoadListener loadListener) {
         RequestQueue queue = null;
-        Date date=new Date();
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String now =format.format(date);
 
-        String time= null;
-        try {
-            time = DateUtil.dateToStamp(now);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        String url = "http://japi.juhe.cn/joke/img/list.from?key=0cfd1378e6ed2ad1bd1210a24feb5fd4&page=2&pagesize=10&sort=desc&time="+time;
+        String url =IURL.PICPATH_ROOT+IURL.KEY;
         if (queue == null) {
             queue = Volley.newRequestQueue(context);
         }
@@ -246,33 +235,12 @@ public class HttpManager {
     }
 
     //网络请求推荐页面
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     public static void loadTuijian(Context context, final TuijianLoadListener loadListener) {
         RequestQueue queue = null;
+        String url = IURL.TEXTPATH_ROOT + IURL.KEY;
 
-       /* SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss ");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String now =format.format(curDate);*/
-
-        Date date=new Date();
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String now =format.format(date);
-        Log.i("TAG:now",now);
-        String time= null;
-        try {
-            time = DateUtil.dateToStamp(now);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Log.i("TAG:time",time);
-
-
-
-        String url = "http://japi.juhe.cn/joke/content/list.from?key=0cfd1378e6ed2ad1bd1210a24feb5fd4&page=1&pagesize=20&sort=desc&time="+time;
-        Log.i("TAG:url",url);
-        if (queue == null)
-
-        {
+        if (queue == null) {
             queue = Volley.newRequestQueue(context);
         }
 
@@ -281,7 +249,7 @@ public class HttpManager {
             public void onResponse(String s) {
                 Gson gson = new Gson();
                 Tuijian tuijian = gson.fromJson(s, Tuijian.class);
-                //Log.i("TAG:weather",weatherBean.toString());
+                //Log.i("TAG:weather",tuijian.toString());
                 loadListener.onTuijianLoadEnd(tuijian);
             }
         }, new Response.ErrorListener() {
@@ -299,6 +267,38 @@ public class HttpManager {
         public void onTuijianLoadEnd(Tuijian tuijian);
     }
 
+    //网络请求动图页面
+
+    public static void loadGif(Context context, final GifLoadListener loadListener) {
+        RequestQueue queue = null;
+        String url = IURL.GIFPATH_ROOT + IURL.KEY;
+
+        if (queue == null) {
+            queue = Volley.newRequestQueue(context);
+        }
+
+        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Gson gson = new Gson();
+                Gif gif = gson.fromJson(s, Gif.class);
+                //Log.i("TAG:weather",tuijian.toString());
+                loadListener.onGifLoadEnd(gif);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+
+        });
+        queue.add(request);
+
+    }
+
+    public interface GifLoadListener {
+        public void onGifLoadEnd(Gif gif);
+    }
 
 
 }

@@ -41,7 +41,6 @@ public class FunnyFragment extends BaseFragment {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,7 +83,6 @@ public class FunnyFragment extends BaseFragment {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void initialUI() {
         actionbar = (LinearLayout) contentView.findViewById(R.id.actionbar_funny);
@@ -107,12 +105,11 @@ public class FunnyFragment extends BaseFragment {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private void refresh() {
         HttpManager.loadFunny(getContext(), new HttpManager.FunnyLoadListener() {
             @Override
             public void onFunnyLoadEnd(Funny funny) {
-                List<Funny.Result.Data> funnys = funny.getResult().getData();
+                List<Funny.ShowapiResBodyBean.ContentlistBean> funnys = funny.getShowapi_res_body().getContentlist();
                 funnyAdapter.addFunnies(funnys, true);
             }
         });

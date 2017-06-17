@@ -112,7 +112,7 @@ public class TuijianFragment extends BaseFragment {
         HttpManager.loadTuijian(getContext(), new HttpManager.TuijianLoadListener() {
             @Override
             public void onTuijianLoadEnd(Tuijian tuijian) {
-                List<Tuijian.Result.Data> tuijians=tuijian.getResult().getData();
+                List<Tuijian.ShowapiResBodyBean.ContentlistBean> tuijians=tuijian.getShowapi_res_body().getContentlist();
                 tuijianAdapter.addTuijianes(tuijians,true);
             }
         });

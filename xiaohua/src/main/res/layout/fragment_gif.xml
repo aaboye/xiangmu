@@ -1,26 +1,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.ren.tarena.xiaohua.fragment.GifFragment">
 
     <include
         android:id="@+id/actionbar_more"
         layout="@layout/include_actionbar" />
-    <TextView
-        android:textSize="30sp"
-        android:text="====Gif图片好尴尬===="
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        />
-    <com.ren.tarena.xiaohua.activity.MyGifView
-        android:id="@+id/iv"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        />
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh_gif"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#bbbbbb">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_gif"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </LinearLayout>

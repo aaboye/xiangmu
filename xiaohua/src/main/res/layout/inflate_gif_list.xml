@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_title_inflate_fun"
+            android:id="@+id/tv_title_inflate_gif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -25,20 +25,21 @@
             android:textSize="20sp" />
 
         <ImageView
+
             android:layout_marginTop="10dp"
-            android:id="@+id/image_inflate_fun"
+            android:id="@+id/image_inflate_gif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title_inflate_fun"
+            android:layout_below="@+id/tv_title_inflate_gif"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_launcher" />
 
         <TextView
-            android:id="@+id/date_inflate_fun"
+            android:id="@+id/date_inflate_gif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/image_inflate_fun"
+            android:layout_below="@+id/image_inflate_gif"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="2017/5/16" />
@@ -47,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/image_inflate_fun"
+            android:layout_below="@id/image_inflate_gif"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="100dp"
             android:layout_marginTop="10dp"
@@ -57,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/image_inflate_fun"
+            android:layout_below="@id/image_inflate_gif"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="60dp"
             android:layout_marginTop="10dp"
@@ -67,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/image_inflate_fun"
+            android:layout_below="@id/image_inflate_gif"
             android:layout_marginBottom="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="10dp"
